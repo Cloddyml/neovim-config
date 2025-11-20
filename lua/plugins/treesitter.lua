@@ -1,90 +1,57 @@
--- Keybinding Hints
+-- Treesitter Syntax Highlighting
 
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
   
   opts = {
-    preset = "modern",
-    delay = 300,
+    ensure_installed = {
+      "lua", "vim", "vimdoc", "query",
+      "bash", "python", "javascript", "typescript",
+      "html", "css", "json", "yaml", "markdown",
+      "c", "cpp", "rust", "go",
+    },
     
-    plugins = {
-      marks = true,
-      registers = true,
-      spelling = { enabled = true, suggestions = 20 },
-      presets = {
-        operators = true,
-        motions = true,
-        text_objects = true,
-        windows = true,
-        nav = true,
-        z = true,
-        g = true,
+    auto_install = true,
+    
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
+    
+    indent = { enable = true },
+    
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = false,
+        node_decremental = "<bs>",
       },
     },
     
-    win = {
-      border = "rounded",
-      padding = { 1, 2 },
-    },
-    
-    triggers = {
-      { "<auto>", mode = "nixsotc" },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+      },
     },
   },
   
   config = function(_, opts)
-    local wk = require("which-key")
-    wk.setup(opts)
-    
-    wk.add({
-      -- Find
-      { "<leader>f", group = "Find" },
-      { "<leader>ff", desc = "Find Files" },
-      { "<leader>fr", desc = "Recent Files" },
-      { "<leader>fw", desc = "Find Text" },
-      { "<leader>fb", desc = "Buffers" },
-      
-      -- Git
-      { "<leader>g", group = "Git" },
-      { "<leader>gb", desc = "Branches" },
-      { "<leader>gc", desc = "Commits" },
-      { "<leader>gs", desc = "Status" },
-      { "<leader>gg", desc = "LazyGit" },
-      
-      -- Git Hunks
-      { "<leader>h", group = "Git Hunks" },
-      { "<leader>hs", desc = "Stage Hunk" },
-      { "<leader>hr", desc = "Reset Hunk" },
-      { "<leader>hp", desc = "Preview Hunk" },
-      
-      -- LSP
-      { "<leader>l", group = "LSP" },
-      { "<leader>la", desc = "Code Action" },
-      { "<leader>lf", desc = "Format" },
-      { "<leader>lr", desc = "Rename" },
-      { "<leader>ls", desc = "Symbols" },
-      
-      -- Terminal
-      { "<leader>t", group = "Terminal" },
-      { "<leader>tf", desc = "Float Terminal" },
-      { "<leader>th", desc = "Horizontal Terminal" },
-      { "<leader>tv", desc = "Vertical Terminal" },
-      
-      -- Buffer
-      { "<leader>b", group = "Buffer" },
-      { "<leader>bp", desc = "Pick Buffer" },
-      
-      -- Close
-      { "<leader>x", group = "Close" },
-      { "<leader>xx", desc = "Close Buffer" },
-      { "<leader>xr", desc = "Close Right" },
-      { "<leader>xl", desc = "Close Left" },
-      
-      -- Files
-      { "<leader>e", desc = "Explorer Float" },
-      { "<leader>w", desc = "Save" },
-      { "<leader>q", desc = "Quit" },
-    })
+    require("nvim-treesitter.configs").setup(opts)
   end,
 }
