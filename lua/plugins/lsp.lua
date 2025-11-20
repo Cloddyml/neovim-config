@@ -88,7 +88,6 @@ return {
           },
         },
         pyright = {},
-        ts_ls = {},
         html = {},
         cssls = {},
         jsonls = {},

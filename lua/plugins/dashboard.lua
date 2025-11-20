@@ -22,16 +22,16 @@ return {
       config = {
         header = vim.split(logo, "\n"),
         center = {
-          { icon = '  ', desc = 'Find File', key = 'f', action = 'Telescope find_files' },
-          { icon = '  ', desc = 'Recent Files', key = 'r', action = 'Telescope oldfiles' },
-          { icon = '  ', desc = 'Find Text', key = 'w', action = 'Telescope live_grep' },
-          { icon = '  ', desc = 'File Explorer', key = 'e', action = 'Neotree float' },
-          { icon = '  ', desc = 'Config', key = 'c', action = function()
+          { icon = '󰈞  ', desc = 'Find File', key = 'f', action = 'Telescope find_files' },
+          { icon = '󰋚  ', desc = 'Recent Files', key = 'r', action = 'Telescope oldfiles' },
+          { icon = '󰱼  ', desc = 'Find Text', key = 'w', action = 'Telescope live_grep' },
+          { icon = '󰙅  ', desc = 'File Explorer', key = 'e', action = 'Neotree float' },
+          { icon = '󰒓  ', desc = 'Config', key = 'c', action = function()
             vim.cmd('cd ~/.config/nvim')
             require('telescope.builtin').find_files()
           end },
-          { icon = '  ', desc = 'Lazy', key = 'l', action = 'Lazy' },
-          { icon = '  ', desc = 'Quit', key = 'q', action = 'qa' },
+          { icon = '󰒲  ', desc = 'Lazy', key = 'l', action = 'Lazy' },
+          { icon = '󰗼  ', desc = 'Quit', key = 'q', action = 'qa' },
         },
         footer = function()
           local stats = require("lazy").stats()

@@ -129,15 +129,26 @@ augroup("Performance", { clear = true })
 autocmd("BufReadPre", {
   group = "Performance",
   desc = "Disable features for large files",
-  callback = function()
-    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()))
-    if ok and stats and stats.size > 100000 then
-      vim.opt_local.eventignore:append("all")
+  callback = function(event)
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(event.buf))
+    if ok and stats and stats.size > 1000000 then -- 1MB
       vim.opt_local.undofile = false
       vim.opt_local.swapfile = false
       vim.opt_local.loadplugins = false
-      vim.cmd("syntax clear")
-      vim.notify("Large file detected, features disabled", vim.log.levels.WARN)
+      vim.b[event.buf].large_file = true
+      vim.notify("Large file detected (" .. math.floor(stats.size / 1024) .. "KB), features disabled", vim.log.levels.WARN)
+    end
+  end,
+})
+
+autocmd("BufReadPost", {
+  group = "Performance",
+  desc = "Disable syntax for large files",
+  callback = function(event)
+    if vim.b[event.buf].large_file then
+      vim.cmd("syntax off")
+      vim.opt_local.foldmethod = "manual"
+      vim.opt_local.spell = false
     end
   end,
 })

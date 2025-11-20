@@ -59,20 +59,4 @@ opt.fillchars = {
   foldclose = "▸"
 }
 opt.shortmess:append("c")
-
--- Shell
-local function get_shell()
-  if vim.fn.has("win32") == 1 then
-    return "cmd.exe"
-  elseif vim.fn.executable("zsh") == 1 then
-    return "/bin/zsh"
-  else
-    return "/bin/bash" -- bash fallback
-  end
-end
-
--- Legacy settings
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.g.did_load_filetypes = 1
-vim.g.formatoptions = "qrn1"
+opt.formatoptions:remove({ "c", "r", "o" })
