@@ -29,7 +29,7 @@ return {
     },
     
     triggers = {
-      { "<auto>", mode = "nixsotc" },
+      { "<auto>", mode = "nxsotc" },
     },
   },
   
