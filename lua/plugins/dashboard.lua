@@ -31,6 +31,7 @@ return {
             require('telescope.builtin').find_files()
           end },
           { icon = '󰒲  ', desc = 'Lazy', key = 'l', action = 'Lazy' },
+          { icon = '󰏗  ', desc = 'LSP', key = 'm', action = 'Mason' },
           { icon = '󰗼  ', desc = 'Quit', key = 'q', action = 'qa' },
         },
         footer = function()
