@@ -1,5 +1,6 @@
 -- Dashboard Startup Screen
 return {
+  enabled = true,
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
   dependencies = {
