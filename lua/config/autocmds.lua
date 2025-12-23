@@ -177,8 +177,8 @@ autocmd("FileType", {
 
 -- Auto-create directories when saving files
 augroup("AutoCreateDir", { clear = true })
-autocmd("BufWritePre" }, {
-  group = augroup("auto_create_dir"),
+autocmd("BufWritePre", {
+  group = "AutoCreateDir",
   desc = "Auto-create parent directories when saving files",
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
