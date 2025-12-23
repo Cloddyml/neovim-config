@@ -1,7 +1,7 @@
 -- Global Keymaps
 -- Plugin-specific keymaps are set in their respective config files
 
-local keymaps = vim.keymap
+local keymap = vim.keymap
 
 -- Window navigation (Ctrl+hjkl)
 keymap.set('n', '<C-h>', ':wincmd h<CR>', { desc = 'Move to left window' })
