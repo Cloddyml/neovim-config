@@ -1,3 +1,15 @@
+-- Neovim Configuration
+-- Minimum required version: 0.11.2
+
+local required_version = "0.11.2"
+if vim.fn.has("nvim-" .. required_version) == 0 then
+  vim.api.nvim_err_writeln(
+    "Neovim " .. required_version .. "+ required. Current: " .. tostring(vim.version())
+  )
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
+
 -- Check critical dependencies
 local function check_dependencies()
   local deps = {
