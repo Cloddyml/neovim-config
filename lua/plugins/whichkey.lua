@@ -43,6 +43,14 @@ return {
     wk.setup(opts)
     
     wk.add({
+      -- Find
+      { "<leader>f", group = "Find" },
+
+      -- Git
+      { "<leader>g", group = "Git" },
+
+      -- Quickfix
+      { "<leader>x", group = "Quickfix" },
     })
   end,
 }

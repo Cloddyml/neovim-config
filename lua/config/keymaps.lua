@@ -50,14 +50,12 @@ keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous search result' })
 
 -- Utilities
 keymap.set('n', '<leader>W', ':set wrap!<CR>', { desc = 'Toggle wrap' })
-keymap.set('n', '<leader>fp', ':echo expand("%:p")<CR>', { desc = 'Show file path' })
-keymap.set('n', '<leader>sv', ':source $MYVIMRC<CR>', { desc = 'Reload config' })
 
 -- Quickfix
 keymap.set('n', '<leader>xq', ':copen<CR>', { desc = 'Open quickfix' })
 keymap.set('n', '<leader>xc', ':cclose<CR>', { desc = 'Close quickfix' })
-keymap.set('n', '[q', ':cprev<CR>', { desc = 'Previous quickfix' })
-keymap.set('n', ']q', ':cnext<CR>', { desc = 'Next quickfix' })
+keymap.set('n', '<leader>x[', ':cprev<CR>', { desc = 'Previous quickfix' })
+keymap.set('n', '<leader>x]', ':cnext<CR>', { desc = 'Next quickfix' })
 
 -- Make file executable
 keymap.set('n', '<leader>x', ':!chmod +x %<CR>', { desc = 'Make executable', silent = true })
