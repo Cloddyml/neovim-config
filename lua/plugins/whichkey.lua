@@ -54,6 +54,10 @@ return {
 
       -- Buffer
       { "<leader>b", group = "Bufferline" },
+
+      -- Hunk (Git Signs)
+      { "<leader>h", group = "Hunk" },
+      { mode = "v", "<leader>h", group = "Hunk" },
     })
   end,
 }
