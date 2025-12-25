@@ -49,7 +49,7 @@ keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result' })
 keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous search result' })
 
 -- Utilities
-keymap.set('n', '<leader>tw', ':set wrap!<CR>', { desc = 'Toggle wrap' })
+keymap.set('n', '<leader>W', ':set wrap!<CR>', { desc = 'Toggle wrap' })
 keymap.set('n', '<leader>fp', ':echo expand("%:p")<CR>', { desc = 'Show file path' })
 keymap.set('n', '<leader>sv', ':source $MYVIMRC<CR>', { desc = 'Reload config' })
 

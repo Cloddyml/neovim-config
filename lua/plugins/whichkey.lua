@@ -43,13 +43,6 @@ return {
     wk.setup(opts)
     
     wk.add({
-      
-      
-      -- Files
-      { "<leader>e", desc = "Explorer float" },
-      { "<leader>E", desc = "Explorer tree" },
-      { "<leader>w", desc = "Save file" },
-      { "<leader>q", desc = "Quit" }, 
     })
   end,
 }
