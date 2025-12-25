@@ -10,7 +10,7 @@ return {
     { "<leader>t", desc = "Toggle horizontal terminal" },
   },
 
-  config = function(_, opts)
+  config = function()
     require("toggleterm").setup({
       open_mapping = [[<leader>t]],
       hide_numbers = true,
