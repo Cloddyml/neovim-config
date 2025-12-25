@@ -51,6 +51,9 @@ return {
 
       -- Quickfix
       { "<leader>x", group = "Quickfix" },
+
+      -- Buffer
+      { "<leader>b", group = "Bufferline" },
     })
   end,
 }
