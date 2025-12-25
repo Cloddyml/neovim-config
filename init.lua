@@ -16,13 +16,25 @@ local function check_dependencies()
     { cmd = "git", name = "Git", critical = true },
     { cmd = "rg", name = "ripgrep", critical = false },
     { cmd = "fd", name = "fd", critical = false },
+    { cmd = { "gcc", "clang", "cl" }, name = "C/C++ compiler", critical = true },
+    { cmd = { "curl", "wget" }, name = "Download tool (curl or wget)", critical = false },
   }
 
   local missing_critical = {}
   local missing_optional = {}
 
   for _, dep in ipairs(deps) do
-    if vim.fn.executable(dep.cmd) == 0 then
+    local found = false
+    local cmds = type(dep.cmd) == "table" and dep.cmd or { dep.cmd }
+    
+    for _, cmd in ipairs(cmds) do
+      if vim.fn.executable(cmd) == 1 then
+        found = true
+        break
+      end
+    end
+    
+    if not found then
       if dep.critical then
         table.insert(missing_critical, dep.name)
       else
@@ -50,6 +62,50 @@ local function check_dependencies()
 end
 
 check_dependencies()
+
+-- Auto-download spell dictionaries (cross-platform)
+local function ensure_spell_files()
+  local spell_dir = vim.fn.stdpath("data") .. "/site/spell"
+  vim.fn.mkdir(spell_dir, "p")
+  
+  for _, lang in ipairs({ "en", "ru" }) do
+    local spell_file = spell_dir .. "/" .. lang .. ".utf-8.spl"
+    if vim.fn.filereadable(spell_file) == 0 then
+      local url = string.format(
+        "https://ftp.nluug.nl/pub/vim/runtime/spell/%s.utf-8.spl",
+        lang
+      )
+      vim.notify("Downloading spell dictionary: " .. lang, vim.log.levels.INFO)
+      
+      -- Detect platform and use appropriate download command
+      local cmd
+      if vim.fn.has("win32") == 1 then
+        cmd = { "powershell", "-Command", 
+          string.format('Invoke-WebRequest -Uri "%s" -OutFile "%s"', url, spell_file) }
+      elseif vim.fn.executable("curl") == 1 then
+        cmd = { "curl", "-fLo", spell_file, "--create-dirs", url }
+      elseif vim.fn.executable("wget") == 1 then
+        cmd = { "wget", "-O", spell_file, url }
+      else
+        vim.notify("No download tool found (curl/wget)", vim.log.levels.ERROR)
+        return
+      end
+      
+      vim.fn.jobstart(cmd, {
+        on_exit = function(_, code)
+          if code == 0 then
+            vim.notify("Spell dictionary downloaded: " .. lang, vim.log.levels.INFO)
+          else
+            vim.notify("Failed to download: " .. lang, vim.log.levels.WARN)
+          end
+        end
+      })
+    end
+  end
+end
+
+-- Defer spell check to avoid blocking startup
+vim.defer_fn(ensure_spell_files, 100)
 
 -- Enable faster loading via bytecode cache
 vim.loader.enable()
