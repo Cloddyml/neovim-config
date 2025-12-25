@@ -19,7 +19,7 @@ return {
     opts = { 
       ensure_installed = {
         "lua_ls",
-        "pyright", "pylint"
+        "pyright", "pylint",
         "rust_analyzer"
       },
     },
