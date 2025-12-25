@@ -40,12 +40,12 @@ autocmd("BufWritePre", {
   desc = "Trim trailing whitespace on save",
   pattern = "*",
   callback = function()
-    -- Save the cursor position
-    local cursor_pos = vim.api.nvim_win_get_cursor(0)
-    -- Remove trailing white spaces
-    vim.cmd([[%s/\s\+$//e]])
-    -- Restore the cursor position
-    vim.api.nvim_win_set_cursor(0, cursor_pos)
+    -- Save view position
+    local view = vim.fn.winsaveview()
+    -- Trim trailing whitespace
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    -- Restore view position
+    vim.fn.winrestview(view)
   end,
 })
 
