@@ -62,6 +62,20 @@ return {
     completion = { 
       documentation = { auto_show = true },
       ghost_text = { enabled = true },
+      
+      accept = {
+        auto_brackets = {
+          enabled = true,
+
+          kind_resolution = {
+            enabled = true,
+          },
+          semantic_token_resolution = {
+            enabled = true,
+            timeout_ms = 400,
+          },
+        },
+      },
     },
 
     -- Default list of enabled providers defined so that you can extend it
@@ -70,7 +84,7 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         snippets = {
-          score_offset = 5,
+          score_offset = 1,
         }, 
       },
     },
