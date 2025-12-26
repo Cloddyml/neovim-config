@@ -25,7 +25,7 @@ return {
         lualine_x = {
           {
             'lsp_status',
-            icon = '', -- f013
+            icon = '💫 ', -- f013
             symbols = {
               -- Standard unicode symbols to cycle through for LSP progress:
               spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
