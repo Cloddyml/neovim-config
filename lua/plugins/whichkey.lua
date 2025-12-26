@@ -58,6 +58,9 @@ return {
       -- Hunk (Git Signs)
       { "<leader>h", group = "Hunk" },
       { mode = "v", "<leader>h", group = "Hunk" },
+
+      -- Conform
+      { "<leader>l", group = "Conform (Format)" },
     })
   end,
 }
