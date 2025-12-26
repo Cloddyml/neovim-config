@@ -84,7 +84,7 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         snippets = {
-          score_offset = 1,
+          score_offset = 3,
         }, 
       },
     },
