@@ -79,7 +79,7 @@ opt.splitbelow = true -- Horizontal splits will be below
 
 -- Performance
 opt.updatetime = 100 -- Faster completion (4000ms default)
-opt.timeoutlen = 300 -- By default timeoutlen is 1000 ms
+opt.timeoutlen = 300 -- Timeout for key mappings (overridden dynamically in autocmds.lua)
 
 -- Misc
 opt.spelllang = { "en", "ru" }              -- Set spellcheck language to English and Russian

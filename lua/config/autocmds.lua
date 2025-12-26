@@ -3,6 +3,23 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Dynamic timeoutlen based on mode
+augroup("DynamicTimeoutlen", { clear = true })
+autocmd("InsertEnter", {
+  group = "DynamicTimeoutlen",
+  desc = "Set shorter timeoutlen in insert mode for instant keypresses",
+  callback = function()
+    vim.opt.timeoutlen = 50
+  end,
+})
+autocmd("InsertLeave", {
+  group = "DynamicTimeoutlen",
+  desc = "Restore normal timeoutlen in normal mode for key sequences",
+  callback = function()
+    vim.opt.timeoutlen = 300
+  end,
+})
+
 -- Highlight yanked text
 augroup("YankHighlight", { clear = true })
 autocmd("TextYankPost", {
