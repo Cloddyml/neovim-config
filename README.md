@@ -1,4 +1,4 @@
-# requirements:
+# Requirements:
 - gcc
 - git
 - fd
@@ -7,5 +7,6 @@
 - NodeJS
 - npm
 
+# Features
 - [ ] Dashboard - add openning lazy config.
 - [ ] Move all files to new structer with opts.
