@@ -7,6 +7,6 @@
 - NodeJS
 - npm
 
-# Features
+# Features TODO
 - [ ] Dashboard - add openning lazy config.
 - [ ] Move all files to new structer with opts.
